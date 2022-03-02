@@ -6,11 +6,24 @@
   },
   {
     "anonymous": false,
+    "inputs": [{ "indexed": false, "internalType": "uint16", "name": "feeBps", "type": "uint16" }],
+    "name": "DisableFeeOption",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "internalType": "uint16", "name": "feeBps", "type": "uint16" }],
+    "name": "EnableFeeOption",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
     "inputs": [
       { "indexed": true, "internalType": "contract IERC20", "name": "token0", "type": "address" },
       { "indexed": true, "internalType": "contract IERC20", "name": "token1", "type": "address" },
       { "indexed": false, "internalType": "address", "name": "pool", "type": "address" },
       { "indexed": false, "internalType": "uint32", "name": "ampBps", "type": "uint32" },
+      { "indexed": false, "internalType": "uint16", "name": "feeBps", "type": "uint16" },
       { "indexed": false, "internalType": "uint256", "name": "totalPool", "type": "uint256" }
     ],
     "name": "PoolCreated",
@@ -49,11 +62,33 @@
     "inputs": [
       { "internalType": "contract IERC20", "name": "tokenA", "type": "address" },
       { "internalType": "contract IERC20", "name": "tokenB", "type": "address" },
-      { "internalType": "uint32", "name": "ampBps", "type": "uint32" }
+      { "internalType": "uint32", "name": "ampBps", "type": "uint32" },
+      { "internalType": "uint16", "name": "feeBps", "type": "uint16" }
     ],
     "name": "createPool",
     "outputs": [{ "internalType": "address", "name": "pool", "type": "address" }],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint16", "name": "_feeBps", "type": "uint16" }],
+    "name": "disableFeeOption",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint16", "name": "_feeBps", "type": "uint16" }],
+    "name": "enableFeeOption",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint16", "name": "", "type": "uint16" }],
+    "name": "feeOptions",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
     "type": "function"
   },
   {

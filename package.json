@@ -24,7 +24,9 @@
     "deploy-cronos-testnet": "graph deploy dynamic-amm/dmm-exchange-cronos-testnet --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
     "deploy-cronos": "graph deploy dynamic-amm/dmm-exchange-cronos --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
     "watch-local": "graph deploy dynamic-amm/dynamic-amm --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001",
-    "prettier": "./node_modules/.bin/prettier --write src/mappings/*"
+    "prettier": "./node_modules/.bin/prettier --write src/mappings/*",
+    "create-velas": "graph create kybernetwork/kyberswap-exchange-velas --node https://velas-graph.kyberengineering.io/admin",
+    "deploy-velas": "graph deploy --node https://velas-graph.kyberengineering.io/admin --ipfs https://velas-graph.kyberengineering.io/ipfs/ kybernetwork/kyberswap-exchange-velas"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "0.21.1",

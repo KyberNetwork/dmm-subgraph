@@ -153,6 +153,7 @@ export function handlePoolCreated(event: PoolCreated): void {
 
   pool.liquidityPerRisk = ZERO_BD
   pool.amp = event.params.ampBps.toBigDecimal()
+  pool.fee = event.params.feeBps
   pool.save()
 
   // create the tracked contract based on the template

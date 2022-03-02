@@ -1,0 +1,16 @@
+{
+  "network": "velas",
+  "address": "0xaf0936b1dc49b5c7444ca838a5f32080fc043add",
+  "startBlock": "23210983",
+  "factory_address": "0xaf0936b1dc49b5c7444ca838a5f32080fc043add",
+  "eth_pricing_pools": "0x2a71a8b25102a350056d1ca6c1c9404012fe7c50",
+  "wrapped_native_address": "0xc579d1f3cf86749e05cd06f7ade17856c2ce3126",
+  "dai_address": "",
+  "usdc_address": "0xe2c120f188ebd5389f71cf4d9c16d05b62a58993",
+  "usdt_address": "0x01445c31581c354b7338ac35693ab2001b50b9ae",
+  "knc_address": "",
+  "kncl_address": "",
+  "weth_address": "",
+  "minimum_usd_threshold_new_pairs": "0",
+  "minimum_liquidity_threshold_eth": "0"
+}
