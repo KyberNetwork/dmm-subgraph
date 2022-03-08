@@ -1,0 +1,16 @@
+{
+  "network": "aurora",
+  "address": "0x39a8809fbbf22ccaeac450eaf559c076843eb910",
+  "startBlock": "60984660",
+  "factory_address": "0x39a8809fbbf22ccaeac450eaf559c076843eb910",
+  "eth_pricing_pools": "0x83176900f27cf3568a414b037d1bb2badf269c42",
+  "wrapped_native_address": "0xc9bdeed33cd01541e1eed10f90519d2c06fe3feb",
+  "dai_address": "0xe3520349f477a5f6eb06107066048508498a291b",
+  "usdc_address": "0xb12bfca5a55806aaf64e99521918a4bf0fc40802",
+  "usdt_address": "0x4988a896b1227218e4a686fde5eabdcabd91571f",
+  "knc_address": "",
+  "kncl_address": "",
+  "weth_address": "0xc9bdeed33cd01541e1eed10f90519d2c06fe3feb",
+  "minimum_usd_threshold_new_pairs": "1",
+  "minimum_liquidity_threshold_eth": "0"
+}
