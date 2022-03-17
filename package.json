@@ -24,11 +24,7 @@
     "deploy-cronos-testnet": "graph deploy dynamic-amm/dmm-exchange-cronos-testnet --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
     "deploy-cronos": "graph deploy dynamic-amm/dmm-exchange-cronos --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
     "watch-local": "graph deploy dynamic-amm/dynamic-amm --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001",
-    "prettier": "./node_modules/.bin/prettier --write src/mappings/*",
-    "create-velas": "graph create kybernetwork/kyberswap-exchange-velas --node https://velas-graph.kyberengineering.io/admin",
-    "deploy-velas": "graph deploy --node https://velas-graph.kyberengineering.io/admin --ipfs https://velas-graph.kyberengineering.io/ipfs/ kybernetwork/kyberswap-exchange-velas",
-    "create-aurora": "graph create kybernetwork/kyberswap-exchange-aurora --node https://aurora-graph.kyberengineering.io/admin",
-    "deploy-aurora": "graph deploy --node https://aurora-graph.kyberengineering.io/admin --ipfs https://aurora-graph.kyberengineering.io/ipfs/ kybernetwork/kyberswap-exchange-aurora"
+    "prettier": "./node_modules/.bin/prettier --write src/mappings/*"
   },
   "devDependencies": {
     "@graphprotocol/graph-cli": "0.21.1",
