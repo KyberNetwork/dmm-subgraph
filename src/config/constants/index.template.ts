@@ -27,6 +27,7 @@ export const KNC_SYMBOL = 'KNC'
 export const KNCL_ADDRESS = '{{ kncl_address }}'
 export const KNCL_NAME = 'Kyber Network Legacy'
 export const KNCL_SYMBOL = 'KNCL'
+export const WHITELIST_TOKENS = '{{ whitelist_tokens }}'
 
 export let FACTORY_BPS = BigDecimal.fromString('10000')
 

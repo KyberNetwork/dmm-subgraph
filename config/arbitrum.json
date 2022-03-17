@@ -1,0 +1,15 @@
+{
+  "network": "arbitrum",
+  "address": "0x51e8d106c646ca58caf32a47812e95887c071a62",
+  "startBlock": "7238400",
+  "factory_address": "0x51e8d106c646ca58caf32a47812e95887c071a62",
+  "eth_pricing_pools": "0xfba13b2a525d2b11c6c138a3a31040a663921213",
+  "wrapped_native_address": "0x82af49447d8a07e3bd95bd0d56f35241523fbab1",
+  "dai_address": "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
+  "usdc_address": "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8",
+  "usdt_address": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+  "knc_address": "",
+  "kncl_address": "",
+  "minimum_usd_threshold_new_pairs": "1",
+  "minimum_liquidity_threshold_eth": "0"
+}
