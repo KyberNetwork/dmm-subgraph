@@ -6,7 +6,7 @@ import {
   SetFeeConfiguration
 } from '../types/DmmDynamicFeeFactory/DmmDynamicFeeFactory'
 import { PoolCreated as StaticFeePoolCreated } from '../types/DmmStaticFeeFactory/DmmStaticFeeFactory'
-import { DMM_STATIC_FEE_FACTORY_ADDRESS } from '../config/constants'
+import { DMM_STATIC_FEE_FACTORY_ADDRESS, DMM_STATIC_FEE_FACTORY_LEGACY_ADDRESS } from '../config/constants'
 
 import { Pool as PoolTemplate } from '../types/templates'
 
@@ -165,6 +165,12 @@ export function handlePoolCreated(event: StaticFeePoolCreated): void {
   if (isStaticFee) {
     pool.fee = event.params.feeUnits
   }
+
+  // TODO: Add uint16 fee
+  // let isStaticFeeLegacy = event.address.toHexString() == DMM_STATIC_FEE_FACTORY_LEGACY_ADDRESS
+  // if (isStaticFeeLegacy) {
+  //   pool.fee = (event.params as any).feeBps
+  // }
 
   pool.save()
 

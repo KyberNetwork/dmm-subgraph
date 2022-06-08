@@ -70,6 +70,38 @@ dataSources:
           handler: handleSetFeeConfiguration
   {{/dmm_static_fee_factory}}
 
+  {{#dmm_static_fee_factory_legacy}}
+  - kind: ethereum/contract
+    name: DmmStaticFeeFactoryLegacy
+    network: {{network}}
+    source:
+      address: '{{dmm_static_fee_factory_legacy.address}}'
+      abi: DmmStaticFeeFactory
+      startBlock: {{dmm_static_fee_factory.startBlock}}  # contract creation block
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/factory.ts
+      entities:   # defines which entities are written to stores
+        - Pairs
+        - Pools
+        - Tokens
+      abis:
+        - name: DmmStaticFeeFactoryLegacy
+          file: ./abis/DmmStaticFeeFactory.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: ERC20SymbolBytes
+          file: ./abis/ERC20SymbolBytes.json
+        - name: ERC20NameBytes
+          file: ./abis/ERC20NameBytes.json
+      eventHandlers:
+        - event: PoolCreated(indexed address,indexed address,address,uint32,uint16,uint256)
+          handler: handlePoolCreated
+        - event: SetFeeConfiguration(address,uint24)
+          handler: handleSetFeeConfiguration
+  {{/dmm_static_fee_factory_legacy}}
 
   {{#reward_locker}}
   - kind: ethereum/contract

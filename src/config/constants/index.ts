@@ -6,6 +6,7 @@ export const ADDRESS_LOCK = '0xffffffffffffffffffffffffffffffffffffffff'
 
 export const DMM_DYNAMIC_FEE_FACTORY_ADDRESS = '0x0639542a5cd99bd5f4e85f58cb1f61d8fbe32de9'
 export const DMM_STATIC_FEE_FACTORY_ADDRESS = '0xb332f6145a5b064f58ff9793ba3523245f8fafac'
+export const DMM_STATIC_FEE_FACTORY_LEGACY_ADDRESS = ''
 
 export const ETH_PRICING_POOLS = '0x568618004062e83fc286fb322f80a4f2814e80a7|0x26b8d1680b8450dda51fa7d4753cdca9766717bd|0xb26a8395ba1997a4c9a47d1589234bcd3ff468f3'
 
