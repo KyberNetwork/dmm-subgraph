@@ -1,16 +1,22 @@
 /* eslint-disable prefer-const */
 import { log } from '@graphprotocol/graph-ts'
-import { FACTORY_ADDRESS } from '../config/constants'
 import { DmmFactory, Bundle, Pair, Token, Pool } from '../types/schema'
-import { PoolCreated, SetFeeConfiguration } from '../types/DmmFactory/DmmFactory'
+import {
+  PoolCreated as DynamicFeePoolCreated,
+  SetFeeConfiguration
+} from '../types/DmmDynamicFeeFactory/DmmDynamicFeeFactory'
+import { PoolCreated as StaticFeePoolCreated } from '../types/DmmStaticFeeFactory/DmmStaticFeeFactory'
+import { DMM_STATIC_FEE_FACTORY_ADDRESS } from '../config/constants'
+
 import { Pool as PoolTemplate } from '../types/templates'
+
 import { ZERO_BD, ZERO_BI, fetchTokenSymbol, fetchTokenName, fetchTokenTotalSupply, fetchTokenDecimals } from './utils'
 
-function createOrLoadFactory(): DmmFactory {
+function createOrLoadFactory(address: string): DmmFactory {
   // load factory (create if first exchange)
-  let factory = DmmFactory.load(FACTORY_ADDRESS)
+  let factory = DmmFactory.load(address)
   if (factory === null) {
-    factory = new DmmFactory(FACTORY_ADDRESS)
+    factory = new DmmFactory(address)
     factory.pairCount = 0
     factory.poolCount = 0
     factory.totalVolumeETH = ZERO_BD
@@ -35,10 +41,11 @@ function createOrLoadFactory(): DmmFactory {
   return factory as DmmFactory
 }
 
-export function handlePoolCreated(event: PoolCreated): void {
+export function handlePoolCreated(event: StaticFeePoolCreated): void {
   log.debug('------run to handle PoolCreated event ------ ', [])
 
-  let factory = createOrLoadFactory()
+  let factory = createOrLoadFactory(event.address.toHexString())
+
   factory.poolCount = factory.poolCount + 1
   factory.save()
 
@@ -153,16 +160,21 @@ export function handlePoolCreated(event: PoolCreated): void {
 
   pool.liquidityPerRisk = ZERO_BD
   pool.amp = event.params.ampBps.toBigDecimal()
+
+  let isStaticFee = event.address.toHexString() == DMM_STATIC_FEE_FACTORY_ADDRESS
+  if (isStaticFee) {
+    pool.fee = event.params.feeUnits
+  }
+
   pool.save()
 
-  // create the tracked contract based on the template
   PoolTemplate.create(event.params.pool)
 }
 
 export function handleSetFeeConfiguration(event: SetFeeConfiguration): void {
   log.debug('------run to handle SetFeeConfiguration event ------ ', [])
 
-  let factory = createOrLoadFactory()
+  let factory = createOrLoadFactory(event.address.toHexString())
   factory.governmentFeeBps = event.params.governmentFeeBps
   factory.save()
 }
