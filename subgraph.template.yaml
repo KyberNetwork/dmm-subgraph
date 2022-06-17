@@ -76,8 +76,8 @@ dataSources:
     network: {{network}}
     source:
       address: '{{dmm_static_fee_factory_legacy.address}}'
-      abi: DmmStaticFeeFactory
-      startBlock: {{dmm_static_fee_factory.startBlock}}  # contract creation block
+      abi: DmmStaticFeeFactoryLegacy
+      startBlock: {{dmm_static_fee_factory_legacy.startBlock}}  # contract creation block
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -89,7 +89,7 @@ dataSources:
         - Tokens
       abis:
         - name: DmmStaticFeeFactoryLegacy
-          file: ./abis/DmmStaticFeeFactory.json
+          file: ./abis/DmmStaticFeeFactoryLegacy.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20SymbolBytes
@@ -98,8 +98,8 @@ dataSources:
           file: ./abis/ERC20NameBytes.json
       eventHandlers:
         - event: PoolCreated(indexed address,indexed address,address,uint32,uint16,uint256)
-          handler: handlePoolCreated
-        - event: SetFeeConfiguration(address,uint24)
+          handler: handlePoolCreatedLegacy
+        - event: SetFeeConfiguration(address,uint16)
           handler: handleSetFeeConfiguration
   {{/dmm_static_fee_factory_legacy}}
 

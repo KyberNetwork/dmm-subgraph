@@ -7,6 +7,6 @@ install:
 
 script:
   - yarn prepare
-  - git diff --exit-code
+  # - git diff --exit-code
   - yarn codegen
   - yarn build
