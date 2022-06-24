@@ -6,6 +6,7 @@ install:
   - yarn install
 
 script:
+  - export NETWORK=ethereum
   - yarn prepare
   # - git diff --exit-code
   - yarn codegen
