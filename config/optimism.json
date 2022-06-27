@@ -8,8 +8,8 @@
   "wrapped_native_address": "0x4200000000000000000000000000000000000006",
   "knc_address": "",
   "kncl_address": "",
-  "minimum_usd_threshold_new_pairs": "4000",
-  "minimum_liquidity_threshold_eth": "1500",
+  "minimum_usd_threshold_new_pairs": "0",
+  "minimum_liquidity_threshold_eth": "0",
   "whitelistedTokens": [
     "0xda10009cbd5d07dd0cecc66161fc93d7c9000da1",
     "0x7F5c764cBc14f9669B88837ca1490cCa17c31607",
