@@ -80,7 +80,7 @@ dataSources:
       language: wasm/assemblyscript
       file: ./src/mappings/rewardLocker.ts
       entities:   # defines which entities are written to stores
-        - RewardLockers
+        - RewardLocker
       abis:
         - name: KyberRewardLocker
           file: ./abis/KyberRewardLocker.json

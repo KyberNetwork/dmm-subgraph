@@ -82,7 +82,7 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.4
       language: wasm/assemblyscript
-      file: ./src/mappings/factory.ts
+      file: ./src/mappings/factory-legacy.ts
       entities:   # defines which entities are written to stores
         - Pairs
         - Pools
