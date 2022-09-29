@@ -40,6 +40,7 @@ function isCompleteMint(mintId: string): boolean {
 
 export function handleTransfer(event: Transfer): void {
   // ignore initial transfers for first adds
+  log.debug("____ debug halink handle transfer: ", [event.address.toHexString()])
   if (event.params.to.toHexString() == ADDRESS_LOCK && event.params.value.equals(BigInt.fromI32(1000))) {
     return
   }
@@ -48,6 +49,7 @@ export function handleTransfer(event: Transfer): void {
   let factoryAddress = poolContract.factory()
 
   let factory = DmmFactory.load(factoryAddress.toHexString())
+  log.debug("debug halink loaded factory: ", [factory.id])
 
   // user stats
   let from = event.params.from
@@ -236,10 +238,15 @@ export function handleTransfer(event: Transfer): void {
 }
 
 export function handleMint(event: Mint): void {
-  log.debug('___ handle mint ___', [])
-  log.debug('!__________ run to handle mint {}', [event.transaction.hash.toHexString()])
+  log.debug('___ debug halink handle mint ___', [])
+  log.debug('!__________debug run to handle mint {}', [event.transaction.hash.toHexString()])
   let transaction = createOrLoadTransaction(event.transaction.hash, event.block)
+  log.debug('!_____ debug halink createOrLoadTransaction {}', [transaction.id])
   let mints = transaction.mints
+  if (mints.length == 0) {
+    log.debug('is that ok that there is no mints?', [])
+  }
+  log.debug('!_____ debug halink mints', [])
   let mint = MintEvent.load(mints[mints.length - 1])
 
   // const pair = Pair.load(event.address.toHex())
@@ -578,9 +585,10 @@ export function handleSwap(event: Swap): void {
 }
 
 export function handleSync(event: Sync): void {
-  log.debug('___ handle sync ___', [])
+  log.debug('___ debug halink handle sync ___', [])
   // const pair = Pair.load(event.address.toHex())
   let pool = Pool.load(event.address.toHex())
+  log.debug('debug halink', [pool.id.toString()])
   let token0 = Token.load(pool.token0)
   let token1 = Token.load(pool.token1)
   let pair = Pair.load(token0.id + '_' + token1.id)

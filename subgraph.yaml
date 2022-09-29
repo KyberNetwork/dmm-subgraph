@@ -6,11 +6,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: DmmDynamicFeeFactory
-    network: mainnet
+    network: bsc
     source:
-      address: '0x833e4083b7ae46cea85695c4f7ed25cdad8886de'
+      address: '0x878dfe971d44e9122048308301f540910bbd934c'
       abi: DmmDynamicFeeFactory
-      startBlock: 12178218  # contract creation block
+      startBlock: 10475000  # contract creation block
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -37,11 +37,11 @@ dataSources:
 
   - kind: ethereum/contract
     name: DmmStaticFeeFactory
-    network: mainnet
+    network: bsc
     source:
       address: '0x1c758af0688502e49140230f6b0ebd376d429be5'
       abi: DmmStaticFeeFactory
-      startBlock: 14971899  # contract creation block
+      startBlock: 18728872  # contract creation block
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -69,11 +69,11 @@ dataSources:
 
   - kind: ethereum/contract
     name: KyberRewardLocker
-    network: mainnet
+    network: bsc
     source:
       address: '0xfab5186a194588f5ad5074bd52659302906b4522'
       abi: KyberRewardLocker
-      startBlock: 12720768  # contract creation block
+      startBlock: 10533792  # contract creation block
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -91,11 +91,35 @@ dataSources:
           handler: handleRewardContractAdded
         - event: Vested(indexed address,indexed address,uint256,uint256)
           handler: handleVestd
+  - kind: ethereum/contract
+    name: KyberRewardLockerV2
+    network: bsc
+    source:
+      address: '0xd93f7a2cbf4912158d6ccda585c9d234a0d70652'
+      abi: KyberRewardLockerV2
+      startBlock: 15094253  # contract creation block
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/rewardLockerV2.ts
+      entities: # defines which entities are written to stores
+        - RewardLocker
+      abis:
+        - name: KyberRewardLockerV2
+          file: ./abis/KyberRewardLockerV2.json
+        - name: KyberFairLaunchV2
+          file: ./abis/KyberFairLaunchV2.json
+      eventHandlers:
+        - event: RewardContractAdded(indexed address,indexed address,bool)
+          handler: handleRewardContractAdded
+        - event: Vested(indexed address,indexed address,uint256,uint256)
+          handler: handleVestd
 
 templates:
   - kind: ethereum/contract
     name: Pool
-    network: mainnet
+    network: bsc
     source:
       abi: Pool
     mapping:
@@ -127,7 +151,7 @@ templates:
 
   - kind: ethereum/contract
     name: KyberFairLaunch
-    network: mainnet
+    network: bsc
     source:
       abi: KyberFairLaunch
     mapping:
@@ -149,4 +173,29 @@ templates:
         - event: Withdraw(indexed address,indexed uint256,indexed uint256,uint256)
           handler: handleWithdraw
         - event: AddNewPool(indexed address,indexed uint32,indexed uint32,uint256[])
+          handler: handleAddNewPool
+  - kind: ethereum/contract
+    name: KyberFairLaunchV2
+    network: bsc
+    source:
+      abi: KyberFairLaunchV2
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/fairLaunchV2.ts
+      entities:
+        - Pool
+        - Token
+      abis:
+        - name: KyberFairLaunchV2
+          file: ./abis/KyberFairLaunchV2.json
+      eventHandlers:
+        - event: Deposit(indexed address,indexed uint256,indexed uint256,uint256)
+          handler: handleDeposit
+        - event: Harvest(indexed address,indexed uint256,indexed address,uint256,uint256)
+          handler: handleHarvest
+        - event: Withdraw(indexed address,indexed uint256,indexed uint256,uint256)
+          handler: handleWithdraw
+        - event: AddNewPool(indexed address,indexed address,uint32,uint32,uint32)
           handler: handleAddNewPool
