@@ -38,6 +38,20 @@ function isCompleteMint(mintId: string): boolean {
   return MintEvent.load(mintId).sender !== null // sufficient checks
 }
 
+function getFactoryWithRetry(poolContract: PoolABI): Address {
+  let retryAttempt = 5;
+  let factoryAddress = Address.fromString(ADDRESS_ZERO)
+  for (let i = 0; i < retryAttempt; i++) {
+    log.debug("___ debug halink getFactoryWithRetry: {} - {}", ["attempt", i.toString()])
+    let callResult = poolContract.try_factory()
+    if (!callResult.reverted) {
+        factoryAddress = callResult.value;
+        break;
+    }
+  }
+  return factoryAddress;
+}
+
 export function handleTransfer(event: Transfer): void {
   // ignore initial transfers for first adds
   log.debug("____ debug halink handle transfer: ", [event.address.toHexString()])
@@ -46,7 +60,7 @@ export function handleTransfer(event: Transfer): void {
   }
 
   let poolContract = PoolABI.bind(event.address)
-  let factoryAddress = poolContract.factory()
+  let factoryAddress = getFactoryWithRetry(poolContract)
 
   let factory = DmmFactory.load(factoryAddress.toHexString())
   log.debug("debug halink loaded factory: ", [factory.id])
@@ -253,7 +267,7 @@ export function handleMint(event: Mint): void {
   log.debug('!!_______ pool address _____ {} ', [event.address.toHex()])
   let pool = Pool.load(event.address.toHex())
   let poolContract = PoolABI.bind(event.address)
-  let factoryAddress = poolContract.factory()
+  let factoryAddress = getFactoryWithRetry(poolContract)
 
   let factory = DmmFactory.load(factoryAddress.toHexString())
 
@@ -326,7 +340,7 @@ export function handleBurn(event: Burn): void {
   // const pair = Pair.load(event.address.toHex())
   let pool = Pool.load(event.address.toHex())
   let poolContract = PoolABI.bind(event.address)
-  let factoryAddress = poolContract.factory()
+  let factoryAddress = getFactoryWithRetry(poolContract)
   let factory = DmmFactory.load(factoryAddress.toHexString())
 
   //update token info
@@ -465,7 +479,7 @@ export function handleSwap(event: Swap): void {
 
   // update global values, only used tracked amounts for volume
   let poolContract = PoolABI.bind(event.address)
-  let factoryAddress = poolContract.factory()
+  let factoryAddress = getFactoryWithRetry(poolContract)
 
   let factory = DmmFactory.load(factoryAddress.toHexString())
   factory.totalVolumeUSD = factory.totalVolumeUSD.plus(trackedAmountUSD)
@@ -593,7 +607,7 @@ export function handleSync(event: Sync): void {
   let token1 = Token.load(pool.token1)
   let pair = Pair.load(token0.id + '_' + token1.id)
   let poolContract = PoolABI.bind(event.address)
-  let factoryAddress = poolContract.factory()
+  let factoryAddress = getFactoryWithRetry(poolContract)
 
   let factory = DmmFactory.load(factoryAddress.toHexString())
 
