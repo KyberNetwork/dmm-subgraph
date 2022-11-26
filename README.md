@@ -1,3 +1,5 @@
+This repo is archived as we moved subgraph to a mono repo, please check: https://github.com/KyberNetwork/subgraphs
+
 # DMM Subgraph
 
 [Kyber DMM](https://dmm.exchange/) is a decentralized protocol for automated token exchange on Ethereum.
