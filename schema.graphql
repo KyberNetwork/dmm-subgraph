@@ -200,13 +200,13 @@ type Transaction @entity {
   timestamp: BigInt!
   # This is not the reverse of Mint.transaction; it is only used to
   # track incomplete mints (similar for burns and swaps)
-  mints: [Mint]!
-  burns: [Burn]!
-  swaps: [Swap]!
-  harvests: [Harvest]!
-  vests: [Vest]!
-  deposits: [Deposit]!
-  withdraws: [Withdraw]!
+  mints: [Mint!]!
+  burns: [Burn!]!
+  swaps: [Swap!]!
+  harvests: [Harvest!]!
+  vests: [Vest!]!
+  deposits: [Deposit!]!
+  withdraws: [Withdraw!]!
 }
 
 type Mint @entity {

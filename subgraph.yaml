@@ -6,14 +6,14 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: DmmDynamicFeeFactory
-    network: mainnet
+    network: bttc
     source:
-      address: '0x833e4083b7ae46cea85695c4f7ed25cdad8886de'
+      address: '0xd9bfe9979e9ca4b2fe84ba5d4cf963bbcb376974'
       abi: DmmDynamicFeeFactory
-      startBlock: 12178218  # contract creation block
+      startBlock: 5450119  # contract creation block
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:   # defines which entities are written to stores
@@ -37,14 +37,14 @@ dataSources:
 
   - kind: ethereum/contract
     name: DmmStaticFeeFactory
-    network: mainnet
+    network: bttc
     source:
       address: '0x1c758af0688502e49140230f6b0ebd376d429be5'
       abi: DmmStaticFeeFactory
-      startBlock: 14971899  # contract creation block
+      startBlock: 7855046  # contract creation block
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:   # defines which entities are written to stores
@@ -68,24 +68,24 @@ dataSources:
 
 
   - kind: ethereum/contract
-    name: KyberRewardLocker
-    network: mainnet
+    name: KyberRewardLockerV2
+    network: bttc
     source:
-      address: '0xfab5186a194588f5ad5074bd52659302906b4522'
-      abi: KyberRewardLocker
-      startBlock: 12720768  # contract creation block
+      address: '0xE79bfc312328Ab75272785DBf5Bd871b253709A5'
+      abi: KyberRewardLockerV2
+      startBlock: 5450119  # contract creation block
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
-      file: ./src/mappings/rewardLocker.ts
-      entities:   # defines which entities are written to stores
+      file: ./src/mappings/rewardLockerV2.ts
+      entities: # defines which entities are written to stores
         - RewardLocker
       abis:
-        - name: KyberRewardLocker
-          file: ./abis/KyberRewardLocker.json
-        - name: KyberFairLaunch
-          file: ./abis/KyberFairLaunch.json
+        - name: KyberRewardLockerV2
+          file: ./abis/KyberRewardLockerV2.json
+        - name: KyberFairLaunchV2
+          file: ./abis/KyberFairLaunchV2.json
       eventHandlers:
         - event: RewardContractAdded(indexed address,indexed address,bool)
           handler: handleRewardContractAdded
@@ -95,12 +95,12 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Pool
-    network: mainnet
+    network: bttc
     source:
       abi: Pool
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
       file: ./src/mappings/core.ts
       entities:
@@ -126,21 +126,21 @@ templates:
           handler: handleSync
 
   - kind: ethereum/contract
-    name: KyberFairLaunch
-    network: mainnet
+    name: KyberFairLaunchV2
+    network: bttc
     source:
-      abi: KyberFairLaunch
+      abi: KyberFairLaunchV2
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.6
       language: wasm/assemblyscript
-      file: ./src/mappings/fairLaunch.ts
+      file: ./src/mappings/fairLaunchV2.ts
       entities:
         - Pool
         - Token
       abis:
-        - name: KyberFairLaunch
-          file: ./abis/KyberFairLaunch.json
+        - name: KyberFairLaunchV2
+          file: ./abis/KyberFairLaunchV2.json
       eventHandlers:
         - event: Deposit(indexed address,indexed uint256,indexed uint256,uint256)
           handler: handleDeposit
@@ -148,5 +148,5 @@ templates:
           handler: handleHarvest
         - event: Withdraw(indexed address,indexed uint256,indexed uint256,uint256)
           handler: handleWithdraw
-        - event: AddNewPool(indexed address,indexed uint32,indexed uint32,uint256[])
+        - event: AddNewPool(indexed address,indexed address,uint32,uint32,uint32)
           handler: handleAddNewPool
