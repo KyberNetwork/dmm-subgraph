@@ -9,10 +9,18 @@
     "build": "graph build",
     "deploy": "graph deploy kybernetwork/kyberswap-exchange-${NETWORK} --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug",
     "create-subgraph": "graph create kybernetwork/kyberswap-exchange-${NETWORK} --node https://${NETWORK}-graph.kyberengineering.io/admin",
+    "remove-subgraph": "graph remove kybernetwork/kyberswap-exchange-${NETWORK} --node https://${NETWORK}-graph.kyberengineering.io/admin",
     "deploy-subgraph": "graph deploy kybernetwork/kyberswap-exchange-${NETWORK} --debug --ipfs https://${NETWORK}-graph.kyberengineering.io/ipfs --node https://${NETWORK}-graph.kyberengineering.io/admin",
-    "create-local": "graph create dynamic-amm/dynamic-amm --node http://127.0.0.1:8020",
-    "deploy-local": "graph deploy dynamic-amm/dynamic-amm --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
-    "watch-local": "graph deploy dynamic-amm/dynamic-amm --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001",
+    "create-dev": "graph create kybernetwork/kyberswap-exchange-${NETWORK} --node https://${NETWORK}-graph.dev.kyberengineering.io/admin",
+    "remove-dev": "graph remove kybernetwork/kyberswap-exchange-${NETWORK} --node https://${NETWORK}-graph.dev.kyberengineering.io/admin",
+    "deploy-dev": "graph deploy kybernetwork/kyberswap-exchange-${NETWORK} --debug --ipfs https://${NETWORK}-graph.dev.kyberengineering.io/ipfs --node https://${NETWORK}-graph.dev.kyberengineering.io/admin",
+    "create-halink": "graph create kybernetwork/kyberswap-exchange-${NETWORK} --node https://${NETWORK}-graph.dev.kyberengineering.io/admin",
+    "remove-halink": "graph remove kybernetwork/kyberswap-exchange-${NETWORK} --node https://${NETWORK}-graph.dev.kyberengineering.io/admin",
+    "deploy-halink": "graph deploy --product hosted-service halink0803/kyberswap-exchange-${NETWORK}",
+    "create-local": "graph create dynamic-amm/dynamic-amm-${NETWORK} --node http://127.0.0.1:8020",
+    "deploy-local": "graph deploy dynamic-amm/dynamic-amm-${NETWORK} --debug --ipfs http://localhost:5002 --node http://127.0.0.1:8020",
+    "remove-local": "graph remove dynamic-amm/dynamic-amm-${NETWORK} --node http://127.0.0.1:8020",
+    "watch-local": "graph deploy dynamic-amm/dynamic-amm-${NETWORK} --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001",
     "prettier": "./node_modules/.bin/prettier --write src/mappings/*",
     "deploy-ropsten": "graph deploy viet-nv/kyberswap-classic-ropsten --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --debug"
   },
@@ -21,10 +29,10 @@
     "@graphprotocol/graph-ts": "0.20.1",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
-    "eslint": "^6.2.2",
+    "eslint": "^8.25.0",
     "eslint-config-prettier": "^6.1.0",
     "mustache": "^4.2.0",
-    "prettier": "^1.18.2",
-    "typescript": "^3.5.2"
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.4"
   }
 }
